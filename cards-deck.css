@@ -1,0 +1,138 @@
+/******************/
+/*   cards-deck   */
+/******************/
+.cards-deck {
+	position:relative;
+	box-sizing:border-box;
+	width:min(100%,800px);
+	aspect-ratio:1.8;
+	margin:10px auto;
+	border:1px solid #888;
+	border-radius:20px;
+	background:var(--cards-deck-background);
+	display:grid;
+	place-items:center;
+	z-index:2;
+	overflow:hidden;
+	text-align:left;
+}
+.cards-deck * {box-sizing:border-box}
+.cards-deck .card, #cards-zoom {
+	position:absolute;
+	box-sizing:border-box;
+	min-width:25%;
+	padding-bottom:35%;
+	height:0;
+	z-index:1;
+	transition:all 0.4s cubic-bezier(.17,.67,.38,.94);
+	cursor:zoom-in;
+}
+.cards-deck .cards-prev,.cards-deck .cards-next {
+	position:absolute;
+	display:none;
+	top:50%;
+	width:3rem;
+	height:5rem;
+	background:rgba(0,0,0,0.5);
+	background-repeat:no-repeat;
+	background-position:center;
+	border:none;
+	transform:translateY(-50%);
+	cursor:pointer;
+	z-index:10;
+}
+.cards-deck .cards-prev {left:0; background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='100%' height='100%' viewBox='0 0 24 24'%3E%3Cpath stroke='%23eee' fill='%23eee' d='M4 12 L14 22 L16 20 L8 12 L16 4 L14 2z'/%3E%3C/svg%3E")}
+.cards-deck .cards-next {right:0; background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='100%' height='100%' viewBox='0 0 24 24'%3E%3Cpath stroke='%23eee' fill='%23eee' d='M20 12 L10 22 L8 20 L16 12 L8 4 L10 2z'/%3E%3C/svg%3E")}
+/* The cards */
+.cards-deck .card {opacity:0}
+.cards-deck .card[data-position='1'] {opacity:1; transform:translate(-15%,-5%) rotate(-4deg); z-index:3}
+.cards-deck .card[data-position='2'] {opacity:1; transform:translate(-7.5%,-5%) rotate(-1deg); z-index:4}
+.cards-deck .card[data-position='3'] {opacity:1; transform:translate(0,-5%) rotate(2deg); z-index:5}
+.cards-deck .card[data-position='4'] {opacity:1; transform:translate(7.5%,-5%) rotate(5deg); z-index:6}
+.cards-deck .card[data-position='5'] {opacity:1; transform:translate(15%,-5%) rotate(8deg); z-index:7}
+.cards-deck:hover .card[data-position='0'] {transform:translate(-180%,18%) rotate(-25deg)}
+.cards-deck:hover .card[data-position='1'] {transform:translate(-120%,5%) rotate(-16deg)}
+.cards-deck:hover .card[data-position='1']:hover {transform:translate(-120%,5%) rotate(-16deg) scale(120%); z-index:10}
+.cards-deck:hover .card[data-position='2'] {transform:translate(-60%,-3%) rotate(-8deg)}
+.cards-deck:hover .card[data-position='2']:hover {transform:translate(-60%,-3%) rotate(-8deg) scale(120%); z-index:10}
+.cards-deck:hover .card[data-position='3']:hover {transform:translate(0,-5%) rotate(2deg) scale(120%); z-index:10}
+.cards-deck:hover .card[data-position='4'] {transform:translate(60%,-3%) rotate(8deg)}
+.cards-deck:hover .card[data-position='4']:hover {transform:translate(60%,-3%) rotate(8deg) scale(120%); z-index:10}
+.cards-deck:hover .card[data-position='5'] {transform:translate(120%,5%) rotate(16deg)}
+.cards-deck:hover .card[data-position='5']:hover {transform:translate(120%,5%) rotate(16deg) scale(120%); z-index:10}
+.cards-deck:hover .card[data-position='6'] {transform:translate(180%,18%) rotate(25deg)}
+/* The zooming full-screen card */
+#cards-zoom-container.no-transition, #cards-zoom.no-transition {transition:none !important}
+#cards-zoom-container {
+	position:fixed;
+	top:-2rem;
+	left:50%;
+	min-width:0;
+	max-width:0;
+	min-height:0;
+	max-height:0;
+	margin:0;
+	border:0;
+	border-radius:0;
+	transition:all 0.5s linear;
+	background:rgba(0,0,0,0);
+	z-index:200;
+}
+#cards-zoom-container.active {
+	top:0 !important;
+	left:0 !important;
+	min-width:100% !important;
+	min-height:100% !important;
+	background:rgba(0,0,0,0.5);
+}
+#cards-zoom {
+	transition:all 0.5s linear;
+	min-height:0;
+	left:50%;
+	top:50%;
+}
+#cards-zoom.active {
+	top:50% !important;
+	left:50% !important;
+	min-width:95% !important;
+	min-height:95% !important;
+	padding-bottom:0 !important;
+	cursor:zoom-out;
+}
+/* The card contents */
+.cards-deck .card img, #cards-zoom img {
+	position:absolute;
+	width:100%;
+	height:100%;
+	box-sizing:border-box;
+	object-fit:cover;
+	border-radius:8px;
+	border:2px solid #ccc;
+	user-select:none;
+}
+.cards-deck .card p, #cards-zoom p {
+	position:absolute;
+	box-sizing:border-box;
+	width:100%;
+	border:2px solid #ccc;
+	border-top:0;
+	margin:0;
+	bottom:0;
+	font-size:60%;
+	text-align:center;
+	border-radius:0 0 8px 8px;
+	background-color:rgba(0,0,0,0.5);
+}
+#cards-zoom.active p {
+	transition:all 0.5s linear;
+	font-size:1.5rem;
+}
+/* On small screens, the cards are fanned open by default */
+@media (max-width:780px) {
+	.cards-deck .card[data-position='0'] {transform:translate(-180%,18%) rotate(-25deg)}
+	.cards-deck .card[data-position='1'] {transform:translate(-120%,5%) rotate(-16deg)}
+	.cards-deck .card[data-position='2'] {transform:translate(-60%,-3%) rotate(-8deg)}
+	.cards-deck .card[data-position='4'] {transform:translate(60%,-3%) rotate(8deg)}
+	.cards-deck .card[data-position='5'] {transform:translate(120%,5%) rotate(16deg)}
+	.cards-deck .card[data-position='6'] {transform:translate(180%,18%) rotate(25deg)}
+}

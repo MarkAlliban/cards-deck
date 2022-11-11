@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1" />
+	<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+	<!-- Include the CSS and Javascript files. -->
+	<script src="cards-deck.js"></script>
+	<link rel="stylesheet" type="text/css" href="cards-deck.css" />
+	<!-- Add some CSS to make our demo look nice. -->
+	<style type='text/css'>
+	@import url('https://fonts.googleapis.com/css?family=Roboto');
+	:root {
+		--cards-deck-background:linear-gradient(135deg,#336,#558);
+	}
+	html {height:100%}
+	body {
+		height:100%;
+		margin:0;
+		background:#000;
+		color:#fff;
+		font-family:'Roboto';
+	}
+	</style>
+</head>
+<body>
+
+<!-- Must include only ONE cards-zoom-container, it is used when you click a card to zoom in. -->
+<div id='cards-zoom-container' class='cards-deck'><div id='cards-zoom'></div></div>
+
+<div style='position:relative; top:50%; transform:translateY(-50%); text-align:center'>
+	<h1>Cards Deck</h1>
+	<!-- You can put as many cards-decks as you like on a page -->
+	<div class='cards-deck'>
+		<!-- 5 cards are shown at once. If there are more than 5, there will be arrows to scroll them. Make sure the data-position starts at 1 and increases. -->
+		<!-- If you want the initial position to be the 2nd or 3rd card, you can start data-position at 0, -1, -2, etc. -->
+		<!-- If you have fewer than 5 cards then you can use data-position to set their positions - eg. for 3 cards, set them to 2, 3 and 4 to center the cards; 1, 3 and 5 to spread them out. -->
+		<div class='card' data-position='1'><img src='img1.jpg'><p>Green-crowned Brilliant</p></div>
+		<div class='card' data-position='2'><img src='img2.jpg'><p>Prong-billed Barbet</p></div>
+		<div class='card' data-position='3'><img src='img3.jpg'><p>Monarch Butterfly</p></div>
+		<div class='card' data-position='4'><img src='img4.jpg'><p>Violet Sabrewing</p></div>
+		<div class='card' data-position='5'><img src='img5.jpg'><p>Crimson-collared Tanager</p></div>
+		<div class='card' data-position='6'><img src='img6.jpg'><p>Collared Aracari</p></div>
+		<div class='card' data-position='7'><img src='img7.jpg'><p>Sara Longwing Butterfly</p></div>
+		<div class='card' data-position='8'><img src='img8.jpg'><p>Scarlet-rumped Tanager</p></div>
+		<div class='card' data-position='9'><img src='img9.jpg'><p>Black-throated Trogon</p></div>
+		<div class='card' data-position='10'><img src='img10.jpg'><p>Strawberry Poison Dart Frog</p></div>
+		<!-- If you have 5 or fewer cards then you can omit these buttons (or leave them, they will be hidden anyway). -->
+		<button type='button' class='cards-prev'></button>
+		<button type='button' class='cards-next'></button>
+	</div>
+</div>
+
+</body>
+</html>
